@@ -8,4 +8,21 @@ function removeText (string) {
   return string.replace(regex, '');
 }
 
-output.textContent = removeText(input.value);
+// textVal = removeText(input.value);
+
+// output.textContent = textVal;
+
+// Timeout variable
+var t = 0;
+
+// Convert the input textarea and show it as output
+function updateOutput() {
+	var textVal = removeText(input.value);
+	output.textContent = textVal;
+}
+
+// Update the output after a period of inactivity
+input.onkeyup = input.onchange = input.onpaste = function () {
+	clearTimeout(t);
+	t = setTimeout(updateOutput, 375);
+};
